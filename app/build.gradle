@@ -1,0 +1,68 @@
+// ----------- Gradle 8.0, Gradle Plugin 8.1.2 -----------
+//plugins {
+//    id 'com.android.application'
+//    id 'org.jetbrains.kotlin.android'
+//}
+
+// ----------- Gradle 7.5, Gradle Plugin 7.4.2 -----------
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.xpel.xlightweight_store_android'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.xpel.xlightweight_store_android"
+        minSdk 24
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.3'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation platform('androidx.compose:compose-bom:2023.03.00')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.material3:material3'
+
+    // ----------- Gradle 7.5, Gradle Plugin 7.4.2 -----------
+    // fix: [Duplicate class in Kotlin Android] https://stackoverflow.com/a/75298544/1749293
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+
+    implementation project(path: ':module')  // debug the source
+}
