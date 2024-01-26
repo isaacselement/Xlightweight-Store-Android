@@ -2,7 +2,7 @@
 <network-security-config>
     <domain-config>
         <!-- Make sure your URL Server here -->
-        <domain includeSubdomains="true">xiaolong.test.xiaopeng.com</domain>
+        <domain includeSubdomains="true">test.xpel.com</domain>
         <trust-anchors>
             <certificates src="user"/>
             <certificates src="system"/>

@@ -1,0 +1,57 @@
+// ----------- Gradle 7.5, Gradle Plugin 7.4.2 -----------
+apply plugin: 'maven-publish'
+
+publishing {
+    repositories {
+        maven {
+            url = uri("http://127.0.0.1:8081/repository/maven-snapshots/")
+            credentials {
+                username = "admin"
+                password = "admin"
+            }
+        }
+    }
+//    publications {
+//        maven(MavenPublication) {
+//            groupId = 'com.github.Tesla'
+//            artifactId = 'Xlightweight-Store-Android'
+//            version = '0.0.3-SNAPSHOT'
+//        }
+//    }
+}
+afterEvaluate {
+    publishing {
+        publications {
+            profile(MavenPublication) {
+                // Applies the component for the release build variant.
+                // from components.release
+                from components.findByName('release')
+                // groupId, artifactId, version
+                groupId = 'com.github.Tesla'
+                artifactId = 'Xlightweight-Store-Android'
+                version = '1.0.0-SNAPSHOT'
+            }
+        }
+    }
+}
+
+// Maybe (not tested) ----------- Gradle 4.x, Gradle Plugin 4.x.x -----------
+//apply plugin: 'maven'
+//
+//uploadArchives {
+//    configuration = configurations.archives
+//    repositories {
+//        mavenDeployer {
+//            // 仓库路径 (只能是hosted仓库)
+//            repository(url: 'http://127.0.0.1:8081/repository/maven-snapshots/') {
+//                // Nexus 的账户密码
+//                authentication(userName: 'admin', password: 'admin')
+//            }
+//            pom.project {
+//                groupId 'com.github.Tesla'
+//                artifactId 'Xlightweight-Store-Android'
+//                version '0.0.2-SNAPSHOT'
+//            }
+//        }
+//    }
+//}

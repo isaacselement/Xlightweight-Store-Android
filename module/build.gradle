@@ -9,7 +9,8 @@ plugins {
     id 'maven-publish'
 }
 
-//apply from: "${rootDir}/__YOUR_MODULE_PUBLISH__.gradle"
+apply from: "${rootDir}/module/publish_local_nexus.gradle"
+//apply from: "${rootDir}/module/__YOUR_MODULE_PUBLISH__.gradle"
 
 // Just for publish to local.
 // jitpack.io do not use the following configurations, it just need github user domain & git repository name & git tag information
