@@ -58,7 +58,7 @@ public abstract class TlStoreBase {
     }
 
     public boolean isEnableCrypto() {
-        return aesKey != null && aesIV != null;
+        return aesKey != null && aesIV != null && !aesKey.isEmpty() && !aesIV.isEmpty();
     }
 
     protected String encodeKeyIfNeeded(String key) {

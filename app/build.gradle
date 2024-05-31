@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.xpel.xlightweight_store_android"
-        minSdk 24
+        minSdk 23
         versionCode 1
         versionName "1.0"
 
@@ -67,5 +67,5 @@ dependencies {
 
     implementation project(path: ':module')  // use the debug source
     // use the release aar from local/private maven repo server
-//    implementation 'com.github.Tesla:Xlightweight-Store-Android:1.0.0-SNAPSHOT'
+//    implementation 'com.github.isaacselement:Xlightweight-Store-Android:0.0.1'
 }

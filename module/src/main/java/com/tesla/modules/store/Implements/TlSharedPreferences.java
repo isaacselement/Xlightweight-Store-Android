@@ -20,6 +20,11 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         this.preferences = TlStoreUtil.getContext().getSharedPreferences(moduleName, Context.MODE_PRIVATE);
     }
 
+    public TlSharedPreferences(@NonNull String moduleName, @Nullable String aesKey, @Nullable String aesIV, Boolean isAsyncApply) {
+        this(moduleName, aesKey, aesIV);
+        this.isAsyncApply = isAsyncApply != null ? isAsyncApply : false;
+    }
+
     @Override
     public boolean contains(String key) {
         if (key == null) return false;
