@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.tesla.modules.store.util.ByteUtil;
+import com.tesla.modules.store.util.CallUtil;
 
 import java.util.function.Function;
 
@@ -63,7 +64,7 @@ public abstract class TlStoreBase {
 
     protected String encodeKeyIfNeeded(String key) {
         if (this.keyTransformer != null && key != null) {
-            key = this.keyTransformer.apply(key);
+            key = CallUtil.safeApply(this.keyTransformer, key);
         }
         return key;
     }

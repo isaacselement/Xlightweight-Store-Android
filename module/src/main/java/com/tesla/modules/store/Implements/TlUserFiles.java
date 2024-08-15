@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.tesla.modules.store.TlStoreInterface;
+import com.tesla.modules.store.util.CallUtil;
 import com.tesla.modules.store.util.TlStoreUtil;
 
 import java.io.File;
@@ -44,7 +45,7 @@ public class TlUserFiles extends TlStoreBase implements TlStoreInterface {
         String value = TlStoreUtil.readFile(path);
         if (this.valueDecoder != null && value != null) {
             // Try to decode value if needed
-            value = this.valueDecoder.apply(value);
+            value = CallUtil.safeApply(this.valueDecoder, value);
         }
         return value != null ? value : defValue;
     }
@@ -119,7 +120,7 @@ public class TlUserFiles extends TlStoreBase implements TlStoreInterface {
         if (key == null) return;
         // Try to encode value if needed
         if (this.valueEncoder != null && value != null) {
-            value = this.valueEncoder.apply(value);
+            value = CallUtil.safeApply(this.valueEncoder, value);
         }
         if (value == null) return;
         String path = getFullPath(key);

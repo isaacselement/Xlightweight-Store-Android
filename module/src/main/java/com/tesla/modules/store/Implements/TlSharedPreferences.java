@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.tesla.modules.store.TlStoreInterface;
+import com.tesla.modules.store.util.CallUtil;
 import com.tesla.modules.store.util.TlStoreUtil;
 
 public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface {
@@ -38,7 +39,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
             // Try to decode value if needed
             String value = preferences.getString(encodeKeyIfNeeded(key), null);
             if (value != null) {
-                return this.valueDecoder.apply(value);
+                return CallUtil.safeApply(this.valueDecoder, value);
             }
             return defValue;
         }
@@ -161,7 +162,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         if (key == null) return;
         // Try to encode value if needed
         if (this.valueEncoder != null && value != null) {
-            value = this.valueEncoder.apply(value);
+            value = CallUtil.safeApply(this.valueEncoder, value);
         }
         // Just save the clear value
         doCommit(preferences.edit().putString(encodeKeyIfNeeded(key), value));
@@ -172,7 +173,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         if (key == null) return;
         if (this.valueEncoder != null) {
             // Try to encode value if needed
-            String result = this.valueEncoder.apply(String.valueOf(value));
+            String result = CallUtil.safeApply(this.valueEncoder, String.valueOf(value));
             doCommit(preferences.edit().putString(encodeKeyIfNeeded(key), result));
             return;
         }
@@ -185,7 +186,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         if (key == null) return;
         if (this.valueEncoder != null) {
             // Try to encode value if needed
-            String result = this.valueEncoder.apply(String.valueOf(value));
+            String result = CallUtil.safeApply(this.valueEncoder, String.valueOf(value));
             doCommit(preferences.edit().putString(encodeKeyIfNeeded(key), result));
             return;
         }
@@ -198,7 +199,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         if (key == null) return;
         if (this.valueEncoder != null) {
             // Try to encode value if needed
-            String result = this.valueEncoder.apply(String.valueOf(value));
+            String result = CallUtil.safeApply(this.valueEncoder, String.valueOf(value));
             doCommit(preferences.edit().putString(encodeKeyIfNeeded(key), result));
             return;
         }
@@ -211,7 +212,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         if (key == null) return;
         if (this.valueEncoder != null) {
             // Try to encode value if needed
-            String result = this.valueEncoder.apply(String.valueOf(value));
+            String result = CallUtil.safeApply(this.valueEncoder, String.valueOf(value));
             doCommit(preferences.edit().putString(encodeKeyIfNeeded(key), result));
             return;
         }
@@ -224,7 +225,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
         if (key == null) return;
         if (this.valueEncoder != null) {
             // Try to encode value if needed
-            String result = this.valueEncoder.apply(String.valueOf(value));
+            String result = CallUtil.safeApply(this.valueEncoder, String.valueOf(value));
             doCommit(preferences.edit().putString(encodeKeyIfNeeded(key), result));
             return;
         }
