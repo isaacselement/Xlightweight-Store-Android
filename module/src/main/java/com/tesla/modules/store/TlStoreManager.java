@@ -34,11 +34,13 @@ public class TlStoreManager {
 
     public void register(@NonNull String module, @Nullable String aesKey, @Nullable String aesIV,
                          @Nullable Boolean isAsyncApply, @Nullable Boolean isKeepKeyClearText) {
+        if (module == null) return;
         HashMap<String, Object> spec = new HashMap<>();
         if (aesKey != null) spec.put("aesKey", aesKey);
         if (aesIV != null) spec.put("aesIV", aesIV);
         if (isAsyncApply != null) spec.put("isAsyncApply", isAsyncApply);
         if (isKeepKeyClearText != null) spec.put("isKeepKeyClearText", isKeepKeyClearText);
+        mStores.remove(module);
         mSpecs.put(module, spec);
     }
 
